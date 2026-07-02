@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support - Glyph Match</title>
+  <meta name="description" content="Technical support and FAQ for Glyph Match: Hanzi Puzzle.">
+  <link rel="icon" href="assets/icon.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink:#201512;
+      --muted:#6d5b52;
+      --paper:#fff9f1;
+      --panel:#ffffff;
+      --line:#e5c99f;
+      --blue:#176c82;
+      --red:#b92722;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:var(--ink); background:var(--paper); line-height:1.65; }
+    a { color:var(--blue); text-underline-offset:0.18em; }
+    .page { width:min(960px, calc(100% - 32px)); margin:0 auto; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; font-weight:800; }
+    .brand img { width:44px; height:44px; border-radius:10px; }
+    nav { display:flex; flex-wrap:wrap; gap:14px; font-weight:700; font-size:14px; }
+    main { padding:42px 0 56px; }
+    h1 { margin:0 0 10px; font-size:clamp(34px, 5vw, 54px); line-height:1; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:24px; line-height:1.2; letter-spacing:0; }
+    h3 { margin:24px 0 6px; font-size:18px; letter-spacing:0; }
+    p, li { font-size:16px; }
+    .muted { color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; margin-top:28px; }
+    .card { padding:22px; border:1px solid var(--line); border-radius:8px; background:var(--panel); }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0 16px; margin-top:10px; border-radius:8px; background:#1d1512; color:#fff; font-weight:800; text-decoration:none; }
+    .locales { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    .locales span { display:inline-flex; align-items:center; min-height:32px; padding:0 10px; border:1px solid var(--line); border-radius:999px; background:#fff; font-weight:700; }
+    .warning { border-left:4px solid var(--red); padding-left:14px; }
+    footer { padding:28px 0 42px; color:var(--muted); border-top:1px solid var(--line); font-size:14px; }
+    @media (max-width:760px) { header { align-items:flex-start; flex-direction:column; } .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="brand" href="./"><img src="assets/icon.png" alt=""> Glyph Match</a>
+      <nav aria-label="Primary">
+        <a href="./">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Support</h1>
+      <p class="muted">Technical support for Glyph Match: Hanzi Puzzle.</p>
+
+      <div class="grid">
+        <section class="card" aria-labelledby="contact">
+          <h2 id="contact">Contact</h2>
+          <p>For bug reports, gameplay issues, privacy questions, or App Store support requests, please open a GitHub issue.</p>
+          <a class="button" href="https://github.com/AI-Scarlett/glyph-match-support/issues">Open a support issue</a>
+        </section>
+
+        <section class="card" aria-labelledby="app">
+          <h2 id="app">App information</h2>
+          <p><strong>App name:</strong> Glyph Match: Hanzi Puzzle</p>
+          <p><strong>Bundle ID:</strong> com.zhouxiaoming.glyphmatch</p>
+          <p><strong>Apple ID:</strong> 6786511152</p>
+          <p><a href="https://apps.apple.com/app/id6786511152">View on the App Store</a></p>
+        </section>
+      </div>
+
+      <section class="card" style="margin-top:16px" aria-labelledby="faq">
+        <h2 id="faq">FAQ</h2>
+
+        <h3>The game feels slow or the animations stutter.</h3>
+        <p>Close background apps, disable Low Power Mode, and restart the device. If you are using a simulator, performance may not reflect a real iPhone or iPad.</p>
+
+        <h3>Game Center does not show my score.</h3>
+        <p>Confirm that you are signed in to Game Center in iOS Settings and that the device has a network connection. If Game Center is unavailable, local gameplay still works.</p>
+
+        <h3>Can I play without an account?</h3>
+        <p>Yes. The current version does not require a developer account or in-game account. Local progress is stored on your device.</p>
+
+        <h3>How do I change the language?</h3>
+        <p>Use the in-app language selector on the home screen. The app supports English, Simplified Chinese, Japanese, Korean, and Portuguese.</p>
+        <div class="locales">
+          <span>English</span>
+          <span>简体中文</span>
+          <span>日本語</span>
+          <span>한국어</span>
+          <span>Português</span>
+        </div>
+
+        <h3>How do I delete my progress?</h3>
+        <p>Local progress is stored on your device. Deleting the app removes local app data from the device. Game Center records are managed by Apple through your Apple ID and Game Center settings.</p>
+      </section>
+
+      <section class="card warning" style="margin-top:16px" aria-labelledby="report">
+        <h2 id="report">When reporting a problem</h2>
+        <p>Please include your device model, iOS version, app version, the level number, and what happened before the issue appeared. Screenshots or screen recordings are helpful when available.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © 2026 Glyph Match.</p>
+    </footer>
+  </div>
+</body>
+</html>

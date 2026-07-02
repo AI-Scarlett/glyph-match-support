@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glyph Match: Hanzi Puzzle</title>
+  <meta name="description" content="Official support site for Glyph Match: Hanzi Puzzle, an iOS match puzzle game about look-alike Hanzi glyphs.">
+  <link rel="icon" href="assets/icon.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #201512;
+      --muted: #6d5b52;
+      --paper: #fff9f1;
+      --panel: #ffffff;
+      --line: #e5c99f;
+      --red: #b92722;
+      --green: #287349;
+      --gold: #d49734;
+      --blue: #176c82;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fffdf8 0%, var(--paper) 48%, #f7ead8 100%);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(70, 37, 20, 0.18);
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 44px;
+      min-height: 68vh;
+      padding: 28px 0 56px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(44px, 6vw, 78px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 28px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 16px; }
+
+    .lead {
+      max-width: 620px;
+      font-size: 19px;
+      color: #49362f;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid #1d1512;
+      border-radius: 8px;
+      background: #1d1512;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .board {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 18px;
+      border: 2px solid #c28a32;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #7c2118 0%, #a54522 52%, #bf7a35 100%);
+      box-shadow: 0 24px 60px rgba(91, 43, 18, 0.25);
+      transform: rotate(-1.5deg);
+    }
+
+    .tile {
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #fff5e3, #d8b471);
+      color: #874116;
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 900;
+      box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.86), inset 0 -5px 12px rgba(70, 28, 9, 0.18);
+    }
+
+    .tile:nth-child(4n + 2) { color: var(--green); background: linear-gradient(145deg, #fff6ea, #c6dfc9); }
+    .tile:nth-child(4n + 3) { color: var(--blue); background: linear-gradient(145deg, #fff8ed, #c7e5ea); }
+    .tile:nth-child(5n) { color: var(--red); }
+
+    .section {
+      padding: 46px 0;
+      border-top: 1px solid rgba(166, 109, 43, 0.24);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .locale-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .locale-list span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 34px 0 46px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      header { align-items: flex-start; flex-direction: column; }
+      nav { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; min-height: auto; gap: 28px; }
+      .board { transform: none; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="brand" href="./" aria-label="Glyph Match home">
+        <img src="assets/icon.png" alt="Glyph Match app icon">
+        <span>
+          <strong>Glyph Match</strong>
+          <span>Hanzi Puzzle</span>
+        </span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Glyph Match: Hanzi Puzzle</h1>
+          <p class="lead">A match puzzle game about look-alike Hanzi glyphs. Swap tiles, collect glyph families, and learn to notice the tiny differences between strokes, openings, silhouettes, and cultural motifs.</p>
+          <div class="actions">
+            <a class="button" href="https://apps.apple.com/app/id6786511152">View on the App Store</a>
+            <a class="button secondary" href="support.html">Get Support</a>
+          </div>
+        </div>
+
+        <div class="board" aria-label="Decorative Hanzi puzzle board">
+          <div class="tile">日</div>
+          <div class="tile">目</div>
+          <div class="tile">青</div>
+          <div class="tile">戌</div>
+          <div class="tile">申</div>
+          <div class="tile">甲</div>
+          <div class="tile">牛</div>
+          <div class="tile">午</div>
+          <div class="tile">仓</div>
+          <div class="tile">沧</div>
+          <div class="tile">晴</div>
+          <div class="tile">清</div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="features">
+        <h2 id="features">Built for pattern recognition</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>Match 3 gameplay</strong>
+            <p>Clear each board by swapping Hanzi tiles and matching 3 or more glyphs from the same family.</p>
+          </div>
+          <div class="card">
+            <strong>Five-star clears</strong>
+            <p>Earn up to 5 stars based on efficient moves, score, chains, and clean level completion.</p>
+          </div>
+          <div class="card">
+            <strong>Game Center ready</strong>
+            <p>Track best score, total stars, completed levels, leaderboards, and achievements through Apple Game Center.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="languages">
+        <h2 id="languages">Languages</h2>
+        <p>Glyph Match is designed for international release with English as the default app language and in-app language switching.</p>
+        <div class="locale-list" aria-label="Supported languages">
+          <span>English</span>
+          <span>简体中文</span>
+          <span>日本語</span>
+          <span>한국어</span>
+          <span>Português</span>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="links">
+        <h2 id="links">App Store links</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>Privacy Policy</strong>
+            <p><a href="privacy.html">Read how the app handles local progress, Game Center, and sharing.</a></p>
+          </div>
+          <div class="card">
+            <strong>Terms of Use</strong>
+            <p><a href="terms.html">Review the rules for using the game and Game Center features.</a></p>
+          </div>
+          <div class="card">
+            <strong>Technical Support</strong>
+            <p><a href="support.html">Find troubleshooting steps and ways to report issues.</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © 2026 Glyph Match. Glyph Match: Hanzi Puzzle is an independent iOS game. Apple, App Store, iPhone, iPad, and Game Center are trademarks of Apple Inc.</p>
+    </footer>
+  </div>
+</body>
+</html>
